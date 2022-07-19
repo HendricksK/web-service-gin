@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -26,6 +27,9 @@ func main() {
 	router := gin.Default()
 	router.GET("/albums", getAlbums)
 	router.POST("/albums", postAlbums)
+	router.GET("/albums/:id", getAlbumByID)
+	router.GET("/albums/name/:name", getAlbumByTitle)
+	router.GET("/albums/artist/:artist", getAlbumsByArtist)
 
 	router.Run("localhost:8080")
 }
@@ -46,4 +50,50 @@ func postAlbums(c *gin.Context) {
 
 	albums = append(albums, newAlbum)
 	c.IndentedJSON(http.StatusCreated, newAlbum)
+}
+
+// get album by ID
+func getAlbumByID(c *gin.Context) {
+	id := c.Param("id")
+
+	for _, a := range albums {
+		if a.ID == id {
+			c.IndentedJSON(http.StatusOK, a)
+			return
+		}
+	}
+
+	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "Album not found"})
+}
+
+// get album by Name
+func getAlbumByTitle(c *gin.Context) {
+	title := c.Param("title")
+
+	for _, a := range albums {
+		if a.Title == title {
+			c.IndentedJSON(http.StatusOK, a)
+			return
+		}
+	}
+
+	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "Album not found"})
+}
+
+func getAlbumsByArtist(c *gin.Context) {
+	artist := c.Param("artist")
+	var albumList []album
+
+	for _, a := range albums {
+		if a.Artist == artist {
+			albumList = append(albumList, a)
+		}
+	}
+
+	if len(albumList) > 0 {
+		c.IndentedJSON(http.StatusOK, albumList)
+		return
+	}
+
+	c.IndentedJSON(http.StatusNotFound, gin.H{"message": fmt.Sprintf("No albums found for artist %v", artist)})
 }

@@ -1,0 +1,108 @@
+{
+	"info": {
+		"_postman_id": "095e59f3-32cf-46cf-83dd-761aebcec78f",
+		"name": "go-webservice-gin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11707400"
+	},
+	"item": [
+		{
+			"name": "GET - albums",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "POST - album",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\": \"4\",\n    \"title\": \"The Modern Sound of Betty Carter\",\n    \"artist\": \"Betty Carter\",\n    \"price\": 49.99\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/albums",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"albums"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - album, by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/albums/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"albums",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - album, by Name",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/albums/name/Blue%20Train",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"albums",
+						"name",
+						"Blue%20Train"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET - album, by Artist",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/albums/artist/John%20Coltrane",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"albums",
+						"artist",
+						"John%20Coltrane"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
